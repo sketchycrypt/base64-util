@@ -88,9 +88,9 @@ void decrypt() {
 }
 
 void getUserChoice() {
-    std::cout << "What would you like to do?\n" << std::endl;
-    std::cout << "[1] Encrypt\n" << std::endl;
-    std::cout << "[2] Decrypt\n" << std::endl;
+    std::cout << "What would you like to do?" << std::endl;
+    std::cout << "[1] Encrypt" << std::endl;
+    std::cout << "[2] Decrypt" << std::endl;
 
     int choice;
     std::cin >> choice;
