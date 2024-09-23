@@ -35,7 +35,7 @@ std::string generateFileName(int length)
     return random_string;
 }
 
-void encrypt() {
+void encode() {
     int length = 6;
     std::string input;
     
@@ -49,11 +49,11 @@ void encrypt() {
         std::filesystem::create_directory(directory);
     }
 
-    std::ofstream encryptedFile(directory + "/" + generateFileName(length) + ".txt");
-    encryptedFile << encoded_str;
-    encryptedFile.close();
+    std::ofstream encodedFile(directory + "/" + generateFileName(length) + ".txt");
+    encodedFile << encoded_str;
+    encodedFile.close();
 
-    std::cout << "Successfully encrypted string in base64 and saved to texts directory" << std::endl;
+    std::cout << "Successfully encoded string in base64 and saved to texts directory" << std::endl;
 }
 
 std::string readFileToString(const std::string& filePath) {
@@ -66,8 +66,8 @@ std::string readFileToString(const std::string& filePath) {
     return ss.str();    
 }
 
-void decrypt() {
-    std::cout << "Type the filename you want to decrypt (without extension): ";
+void decode() {
+    std::cout << "Type the filename you want to decode (without extension): ";
     std::string input;
     std::cin >> input;
 
@@ -78,10 +78,10 @@ void decrypt() {
         if (!std::filesystem::exists(filePath)) {
             throw std::runtime_error("File does not exist.");
         }
-        std::string decryptedText = readFileToString(filePath);
-        auto decoded_str = base64::from_base64(decryptedText);
+        std::string decodedText = readFileToString(filePath);
+        auto decoded_str = base64::from_base64(decodedText);
 
-        std::cout << "Decrypted content: " << decoded_str << std::endl;
+        std::cout << "decodeed content: " << decoded_str << std::endl;
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
@@ -89,18 +89,18 @@ void decrypt() {
 
 void getUserChoice() {
     std::cout << "What would you like to do?" << std::endl;
-    std::cout << "[1] Encrypt" << std::endl;
-    std::cout << "[2] Decrypt" << std::endl;
+    std::cout << "[1] Encode" << std::endl;
+    std::cout << "[2] Decode" << std::endl;
 
     int choice;
     std::cin >> choice;
 
     if (choice == 1) {
-        std::cout << "Encrypt selected." << std::endl;
-        encrypt();
+        std::cout << "Encode selected." << std::endl;
+        encode();
     } else if (choice == 2) {
-        std::cout << "Decrypt selected." << std::endl;
-        decrypt();
+        std::cout << "Decode selected." << std::endl;
+        decode();
     } else {
         std::cout << "Invalid input. Please enter 1 or 2." << std::endl;
         getUserChoice();
